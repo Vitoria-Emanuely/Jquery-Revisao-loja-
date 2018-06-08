@@ -6,11 +6,12 @@ class Produto
     private $descricao;
     private $preco;
     private $id;
+    private $id_categoria;
 
-    public function __construct($nome, $descricao, $preco, $id = null){
+    public function __construct($nome, $descricao, $preco, $id_categoria, $id = null){
         $this->nome = $nome;
         $this->descricao = $descricao;
-
+        $this->id_categoria = $id_categoria;
         $this->preco = $preco;
         $this->id = $id;
     }
@@ -54,5 +55,23 @@ class Produto
     {
         $this->preco = $preco;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getIdCategoria()
+    {
+        return $this->id_categoria;
+    }
+
+    /**
+     * @param mixed $id_categoria
+     */
+    public function setIdCategoria($id_categoria)
+    {
+        $this->id_categoria = $id_categoria;
+    }
+
+
 
 }

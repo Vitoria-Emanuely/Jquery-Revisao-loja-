@@ -20,7 +20,7 @@ class CrudProdutos
         //TRANSFORMA RESULTADO EM ARRAY
         $produto = $consulta->fetch(PDO::FETCH_ASSOC);
         //INSTANCIA UM OBJETO DO TIPO CATEGORIA COM OS VALORES RECEBIDOS E O RETORNA
-        return new Produto($produto['nome_produto'], $produto['descricao_produto'], $produto['preco_produto'], $produto['id_produto']);
+        return new Produto($produto['nome_produto'], $produto['descricao_produto'], $produto['preco_produto'], $produto['id_categoria'], $produto['id_produto']);
     }
 
     public function getProdutos()
@@ -30,7 +30,7 @@ class CrudProdutos
 
         $listaProdutos = [];
         foreach ($arrayProdutos as $produto) {
-            $listaProdutos[] = new Produto($produto['nome_produto'], $produto['descricao_produto'], $produto['preco_produto'], $produto['id_produto']);
+            $listaProdutos[] = new Produto($produto['nome_produto'], $produto['descricao_produto'], $produto['preco_produto'], $produto['id_categoria'], $produto['id_produto']);
         }
         return $listaProdutos;
     }
@@ -40,7 +40,8 @@ class CrudProdutos
         $dados[] = $prod->getNome();
         $dados[] = $prod->getDescricao();
         $dados[] = $prod->getPreco();
-        $sql = "INSERT INTO produto (nome_produto, descricao_produto, preco_produto, id_categoria) VALUES ('$dados[0]', '$dados[1]', '$dados[2]', '2')";
+        $dados[] = $prod->getIdCategoria();
+        $sql = "INSERT INTO produto (nome_produto, descricao_produto, preco_produto, id_categoria) VALUES ('$dados[0]', '$dados[1]', '$dados[2]', '$dados[3]')";
         try{
             $res = $this->conexao->exec($sql);
             return true;
@@ -55,7 +56,7 @@ class CrudProdutos
         $descricao = $prod->getDescricao();
         $preco = $prod->getPreco();
         $id_produto = $prod->getId();
-        $sql = "UPDATE produto SET nome_produto='$nome',descricao_produto='$descricao', preco_produto='$preco' WHERE id_produto = $id_produto";
+        $sql = "UPDATE produto SET nome_produto='$nome',descricao_produto='$descricao', preco_produto='$preco', id_categoria='$id_categoria' WHERE id_produto = $id_produto";
         try {
             $this->conexao->exec($sql);
             return true;

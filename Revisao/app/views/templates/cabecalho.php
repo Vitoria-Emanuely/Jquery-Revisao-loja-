@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Categorias</title>
+        <title>App</title>
         <link rel="stylesheet" href="">
         <base href="">
     </head>
